@@ -1,5 +1,7 @@
 # The Knight’s Travails
 
+![test workflow](https://github.com/felipeap92/the-knights-travails/actions/workflows/test.yml/badge.svg)
+
 This is a small program that uses the [Breadth-First Search (BFS)](https://en.wikipedia.org/wiki/Breadth-first_search) algorithm to solve The Knight’s Travails problem, where you have to find the shortest sequence of moves for a Knight between the starting and target positions. 
 
 ## Dependencies
