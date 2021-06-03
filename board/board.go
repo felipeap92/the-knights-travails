@@ -26,8 +26,8 @@ func NewBoard(size int) (*Board, error) {
 	return &Board{size}, nil
 }
 
-func (board *Board) FindShortestPath(startPos, targetPos Vector2D) ([]Vector2D, error) {
-	validKnightMovements := []Vector2D{{1, 2}, {2, 1}, {2, -1}, {1, -2}, {-1, -2}, {-2, -1}, {-2, 1}, {-1, 2}}
+func (board *Board) FindShortestPath(piece Piece, startPos, targetPos Vector2D) ([]Vector2D, error) {
+	validMovements := piece.GetValidMovements()
 	queue := []*PathNode{{
 		Parent: nil,
 		Pos:    startPos,
@@ -52,10 +52,10 @@ func (board *Board) FindShortestPath(startPos, targetPos Vector2D) ([]Vector2D, 
 			return path, nil
 		}
 
-		for _, validKnightMovement := range validKnightMovements {
+		for _, validMovement := range validMovements {
 			newPos := Vector2D{
-				X: node.Pos.X + validKnightMovement.X,
-				Y: node.Pos.Y + validKnightMovement.Y,
+				X: node.Pos.X + validMovement.X,
+				Y: node.Pos.Y + validMovement.Y,
 			}
 
 			if board.isAValidPos(newPos) && !isCellVisited[newPos.X][newPos.Y] {
@@ -66,7 +66,6 @@ func (board *Board) FindShortestPath(startPos, targetPos Vector2D) ([]Vector2D, 
 				}
 				queue = append(queue, newNode)
 			}
-
 		}
 	}
 
